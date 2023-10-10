@@ -25,10 +25,8 @@ if os.path.exists("../src"):
 
 # We add all .cpp files to the sources 
 sources = [ 'platec_src/platecmodule.cpp']
-for f in os.listdir(cpp_src_dir):
-  if f.endswith(".cpp"):
-    sources.append("%s/%s" % (cpp_src_dir, f))
-
+sources.extend(f"{cpp_src_dir}/{f}" for f in os.listdir(cpp_src_dir)
+               if f.endswith(".cpp"))
 pyplatec = Extension('platec',                    
                      sources = sources,
                      language='c++')
